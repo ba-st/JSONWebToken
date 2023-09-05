@@ -1,37 +1,22 @@
-# JSONWebToken for Pharo
+# JSONWebToken
 
-[![Build Status](https://travis-ci.org/noha/JSONWebToken.svg?branch=master)](https://travis-ci.org/noha/JSONWebToken)
+[![Pharo - Unit Tests](https://github.com/ba-st-dependencies/JSONWebToken/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/ba-st-dependencies/JSONWebToken/actions/workflows/unit-tests.yml/badge.svg)
+[![Coverage Status](https://codecov.io/github/ba-st-dependencies/JSONWebToken/coverage.svg?branch=release-candidate)](https://codecov.io/gh/ba-st-dependencies/JSONWebToken/branch/release-candidate)
+
+[![Pharo 9.0](https://img.shields.io/badge/Pharo-9.0-informational)](https://pharo.org)
+[![Pharo 10](https://img.shields.io/badge/Pharo-10-informational)](https://pharo.org)
+[![Pharo 11](https://img.shields.io/badge/Pharo-11-informational)](https://pharo.org)
 
 ## Overview
 
-Implementation of a JSON web token following [RFC 7519](https://tools.ietf.org/html/rfc7519) for [Pharo](http://www.pharo.org).
-
-## Installation
-
-For pharo9 and above use
-
-```Smalltalk
-Metacello new
-      baseline:'JSONWebToken';
-      repository: 'github://noha/JSONWebToken:pharo9-openssl1.1/source';
-      load
-```
-
-For pharo8 and below use
-
-```Smalltalk
-Metacello new
-      baseline:'JSONWebToken';
-      repository: 'github://noha/JSONWebToken:master/source';
-      load
-```
+Implementation of a JSON web token following [RFC 7519](https://tools.ietf.org/html/rfc7519) for [Pharo](http://www.pharo.org) and GemStone 64
 
 ## Usage
 
-The class *JSONWebTokenTest* demonstrates how to encode/serialize a web signature to a token string using compact base 64 notation 
+The class `JSONWebTokenTest` demonstrates how to encode/serialize a web signature to a token string using compact base 64 notation 
 as well as deserialization:
 
-```Smalltalk
+```smalltalk
 testRoundtrip
 	| jws tokenString materialized |
 	
@@ -47,5 +32,5 @@ testRoundtrip
 
 ```
 
-## Further Infos
+## Further Info
 - [JWT, JWS and JWE for Not So Dummies!](https://medium.facilelogin.com/jwt-jws-and-jwe-for-not-so-dummies-b63310d201a3)

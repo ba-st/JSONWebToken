@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'JSONWebToken',
+      #directory : '../source',
+      #load : [ 'Tests' ],
+      #platforms : [  #pharo ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'JSONWebToken*' ],
+      #format: #lcov
+    }
+  }
+}
