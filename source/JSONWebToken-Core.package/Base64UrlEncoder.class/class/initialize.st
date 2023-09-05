@@ -1,4 +1,0 @@
-class initialization
-initialize
-
-	URLSafeAlphabet := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
