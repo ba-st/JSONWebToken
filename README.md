@@ -1,6 +1,6 @@
 # JSON Web Token
 
-A fork of JSON Web Token to be used as a dependency in [ba-st(https://githu.com/ba-st)] for GS/64 & Pharo.
+A fork of JSON Web Token to be used as a dependency in [ba-st](https://githu.com/ba-st) for GS/64 & Pharo.
 
 The `upstream` branch is supposed to track the changes in the `master` branch of [noha/JSONWebToken](https://github.com/noha/JSONWebToken)
 
