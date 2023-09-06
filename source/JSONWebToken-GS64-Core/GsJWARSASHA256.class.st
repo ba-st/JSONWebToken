@@ -10,13 +10,9 @@ Class {
 { #category : #sign }
 GsJWARSASHA256 class >> checkSignature: signature withKey: publicKey isValidFor: headerAndPayload [
 
-	^ [
-	  headerAndPayload
+	^ headerAndPayload
 		  verifyWithSha256AndRsaPublicKey: ( GsTlsPublicKey newFromPemString: publicKey )
-		  signature: signature
-	  ]
-		  on: ArgumentError
-		  do: [ :error | error return: false ]
+		  signature: ( JWSSerializer base64UrlDecoded: signature )
 ]
 
 { #category : #accessing }
