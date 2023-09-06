@@ -12,7 +12,7 @@ JWAHMACSHA256 class >> checkSignature: signature withKey: key isValidFor: header
 
 	( self signMessage: headerAndPayload withKey: key )
 	= ( Base64UrlEncoder new decode: signature base64Padded ) ifFalse: [
-		Error signal: 'signature does not match' ]
+		CryptoError signal: 'signature does not match' ]
 ]
 
 { #category : #accessing }

@@ -18,7 +18,7 @@ JWARSASHA256 class >> checkSignature: signature withKey: publicKeyOrString isVal
 	signatureAsBytes pinInMemory.
 	[
 	( publicKey digestVerifyMessage: headerAndPayload with: signatureAsBytes ) ifFalse: [
-		Error signal: 'signature does not match' ]
+		CryptoError signal: 'signature does not match' ]
 	] ensure: [
 		headerAndPayload unpinInMemory.
 		signatureAsBytes unpinInMemory

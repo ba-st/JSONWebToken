@@ -7,13 +7,8 @@ Class {
 	#instVars : [
 		'algorithm'
 	],
-	#category : 'JSONWebToken-Core-Headers'
+	#category : #'JSONWebToken-Core-Headers'
 }
-
-{ #category : #accessing }
-JWCryptoHeader >> alg [
-	^ properties at: 'alg'
-]
 
 { #category : #accessing }
 JWCryptoHeader >> alg: anObject [
