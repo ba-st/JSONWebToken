@@ -1,0 +1,21 @@
+RwSimpleProjectLoadComponentV2 {
+  #name : 'Deployment',
+  #projectNames : [
+    'NeoJSON'
+  ],
+  #componentNames : [	],
+  #packageNames : [
+    'JSONWebToken-Core',
+    'JSONWebToken-GS64-Base-Extensions'
+  ],
+  #conditionalPackageMapSpecs : {
+    'gemstone' : {
+      'allusers' : {
+        #packageNameToPlatformPropertiesMap : {
+          'JSONWebToken-Core' : { 'symbolDictName' : 'JSONWebToken' },
+          'JSONWebToken-GS64-Base-Extensions' : { 'symbolDictName' : 'Globals' }
+        }
+      }
+    }
+  }
+}

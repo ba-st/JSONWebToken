@@ -1,0 +1,22 @@
+RwSimpleProjectLoadComponentV2 {
+  #name : 'Tests',
+  #condition : 'tests',
+  #projectNames : [ ],
+  #componentNames : [
+    'Deployment'
+  ],
+  #packageNames : [
+    'JSONWebToken-Core-Tests',
+    'JSONWebToken-OpenSSL-Tests'
+  ],
+  #conditionalPackageMapSpecs : {
+    'gemstone' : {
+      'allusers' : {
+        #packageNameToPlatformPropertiesMap : {
+          'JSONWebToken-Core-Tests' : { 'symbolDictName' : 'JSONWebToken' },
+          'JSONWebToken-OpenSSL-Tests' : { 'symbolDictName' : 'JSONWebToken' }
+        }
+      }
+    }
+  }
+}

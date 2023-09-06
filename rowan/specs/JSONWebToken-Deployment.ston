@@ -1,0 +1,9 @@
+RwLoadSpecificationV2 {
+  #specName: 'JSONWebToken-CI',
+  #projectName : 'JSONWebToken',
+  #diskUrl : 'JSONWebToken',
+  #projectSpecFile : 'rowan/project.ston',
+  #componentNames : [
+    'Deployment'
+  ]
+}
