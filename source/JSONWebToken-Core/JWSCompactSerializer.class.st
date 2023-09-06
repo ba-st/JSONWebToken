@@ -6,7 +6,7 @@ compact Base-64 encoded format (using double dispatching)
 Class {
 	#name : #JWSCompactSerializer,
 	#superclass : #JWSSerializer,
-	#category : 'JSONWebToken-Core-Serialization'
+	#category : #'JSONWebToken-Core-Serialization'
 }
 
 { #category : #reading }
@@ -23,7 +23,7 @@ JWSCompactSerializer >> materialize: aString key: aKeyString checkSignature: che
 	(parts size = 3) ifFalse: [ JWSInvalidTokenFormat signal: 'the format of the token is invalid' ].
 	header := JWSHeader fromJson: ( self class base64UrlDecoded: parts first ) utf8Decoded.
 	jws := JsonWebSignature new
-		key: aKeyString;
+		publicKey: aKeyString;
 		setProtectedHeader: header.
 	checkSignature
 		ifTrue: [ jws checkSignature: parts ].

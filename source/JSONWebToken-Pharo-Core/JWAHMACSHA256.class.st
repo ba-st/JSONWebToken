@@ -21,8 +21,8 @@ JWAHMACSHA256 class >> parameterValue [
 ]
 
 { #category : #sign }
-JWAHMACSHA256 class >> signMessage: aString withKey: anObject [
+JWAHMACSHA256 class >> signMessage: aString withKey: key [
 	^ ((HMAC on: SHA256) 
-		key: anObject asByteArray; 
+		key: key asByteArray; 
 		digestMessage: aString asByteArray)
 ]

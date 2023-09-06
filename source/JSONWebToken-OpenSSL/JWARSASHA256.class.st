@@ -33,9 +33,9 @@ JWARSASHA256 class >> parameterValue [
 ]
 
 { #category : #sign }
-JWARSASHA256 class >> signMessage: message withKey: anObject [
+JWARSASHA256 class >> signMessage: message withKey: privateKey [
 	| pkey sig |
-	pkey := LcEvpPublicKey setRSA: (LcRSA fromPemString: anObject).
+	pkey := LcEvpPublicKey setRSA: (LcRSA fromPemString: privateKey).
 	message pinInMemory.
 	sig := [ pkey digestSignMessage: message ]
 		ensure: [ message unpinInMemory ].

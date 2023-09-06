@@ -6,8 +6,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'payload',
-		'key',
-		'protectedHeader'
+		'protectedHeader',
+		'publicKey',
+		'privateKey'
 	],
 	#category : #'JSONWebToken-Core-Base'
 }
@@ -60,7 +61,7 @@ JsonWebSignature >> checkSignature: aString [
 			'.' join: aString  ]
 		ifFalse: [ aString ].
 	
-	self protectedHeader algorithm checkSignature: token withKey: key
+	self protectedHeader algorithm checkSignature: token withKey: publicKey
 
 ]
 
@@ -103,11 +104,6 @@ JsonWebSignature >> headerClass [
 ]
 
 { #category : #accessing }
-JsonWebSignature >> key: aString [
-	key := aString
-]
-
-{ #category : #accessing }
 JsonWebSignature >> payload [
 	^ payload
 ]
@@ -119,9 +115,33 @@ JsonWebSignature >> payload: anObject [
 ]
 
 { #category : #accessing }
+JsonWebSignature >> privateKey [
+
+	^ privateKey
+]
+
+{ #category : #accessing }
+JsonWebSignature >> privateKey: aKey [
+
+	privateKey := aKey
+]
+
+{ #category : #accessing }
 JsonWebSignature >> protectedHeader [
 	^ protectedHeader ifNil: [ 
 		protectedHeader := self headerClass new ]
+]
+
+{ #category : #accessing }
+JsonWebSignature >> publicKey [
+
+	^ publicKey
+]
+
+{ #category : #accessing }
+JsonWebSignature >> publicKey: aKey [
+
+	publicKey := aKey
 ]
 
 { #category : #accessing }
@@ -130,9 +150,17 @@ JsonWebSignature >> setProtectedHeader: aHeader [
 ]
 
 { #category : #signing }
-JsonWebSignature >> signatureFor: aString [ 
-	^ self protectedHeader algorithm 
-		signMessage: aString withKey: key
+JsonWebSignature >> signatureFor: aString [
+
+	^ self protectedHeader algorithm signMessage: aString withKey: privateKey
+]
+
+{ #category : #configuring }
+JsonWebSignature >> symmetricKey: aKey [
+
+	self
+		publicKey: aKey;
+		privateKey: aKey
 ]
 
 { #category : #writing }

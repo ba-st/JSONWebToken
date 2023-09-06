@@ -7,16 +7,16 @@ Class {
 	#category : #'JSONWebToken-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 JSONWebTokenTest >> simpleJsonWebSignature [
 	^ JsonWebSignature new
 			algorithmName: 'HS256';
 			payload: (JWTClaimsSet new
 				at: 'bar' put: 'foo');
-			key: 'foobar'
+			symmetricKey: 'foobar'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 JSONWebTokenTest >> simpleTokenString [
 	^ self simpleJsonWebSignature compactSerialized.
 ]
@@ -46,7 +46,7 @@ JSONWebTokenTest >> testEncoding [
 					put:
 					'read:operations read:metrics execute:health-check read:application-info execute:application-control read:application-configuration';
 				yourself ).
-	jws key: '69YLYMC02jLExrrkcR@NhrZaj%Xw^VFfK*r34uRWvl3e91N3es'.
+	jws symmetricKey: '69YLYMC02jLExrrkcR@NhrZaj%Xw^VFfK*r34uRWvl3e91N3es'.
 
 	tokenString := jws compactSerialized.
 
@@ -74,7 +74,7 @@ JSONWebTokenTest >> testRoundtrip [
 				algorithmName: 'HS256';
 				payload: (JWTClaimsSet new
 				at: 'bar' put: 'foo').
-	jws key: 'foobar'.
+	jws symmetricKey: 'foobar'.
 	
 	tokenString := jws compactSerialized.
 	
@@ -92,7 +92,7 @@ JSONWebTokenTest >> testUnsecuredJWT [
 	jws := JsonWebSignature new
 		algorithmName: 'none';
 		payload: ( JWTClaimsSet new at: 'bar' put: 'foo' ).
-	jws key: 'foobar'.
+	jws symmetricKey: 'foobar'.
 
 	tokenString := jws compactSerialized.
 

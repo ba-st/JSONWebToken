@@ -18,6 +18,6 @@ JWANone class >> parameterValue [
 ]
 
 { #category : #signing }
-JWANone class >> signMessage: aString withKey: aKeyString [
+JWANone class >> signMessage: aString withKey: key [
 	^ #[]
 ]

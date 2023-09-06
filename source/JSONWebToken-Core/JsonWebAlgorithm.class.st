@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #sign }
-JsonWebAlgorithm class >> checkSignature: token withKey: key [
+JsonWebAlgorithm class >> checkSignature: token withKey: publicKey [
 	"keep this method backward compatible also accepting already splitted parts"
 
 	| tokenParts |
@@ -17,7 +17,7 @@ JsonWebAlgorithm class >> checkSignature: token withKey: key [
 		              ifTrue: [ $. split: token ]
 		              ifFalse: [ token ].
 
-	self checkSignature: tokenParts third withKey: key isValidFor: ( '.' join: {
+	self checkSignature: tokenParts third withKey: publicKey isValidFor: ( '.' join: {
 				  tokenParts first.
 				  tokenParts second } )
 ]
@@ -46,7 +46,7 @@ JsonWebAlgorithm class >> parameterValue [
 ]
 
 { #category : #sign }
-JsonWebAlgorithm class >> signMessage: aString withKey: anObject [
+JsonWebAlgorithm class >> signMessage: aString withKey: key [
 
 	self subclassResponsibility
 ]

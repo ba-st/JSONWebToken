@@ -1,7 +1,7 @@
 Class {
 	#name : #JSONWebTokenOpenSSLTest,
 	#superclass : #TestCase,
-	#category : 'JSONWebToken-OpenSSL-Tests'
+	#category : #'JSONWebToken-OpenSSL-Tests'
 }
 
 { #category : #tests }
@@ -19,7 +19,7 @@ JSONWebTokenOpenSSLTest >> testRSAEncoding [
 					put:
 					'read:operations read:metrics execute:health-check read:application-info execute:application-control read:application-configuration';
 				yourself ).
-	jws key: '-----BEGIN RSA PRIVATE KEY-----
+	jws privateKey: '-----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAnzyis1ZjfNB0bBgKFMSvvkTtwlvBsaJq7S5wA+kzeVOVpVWw
 kWdVha4s38XM/pa/yr47av7+z3VTmvDRyAHcaT92whREFpLv9cj5lTeJSibyr/Mr
 m/YtjCZVWgaOYIhwrXwKLqPr/11inWsAkfIytvHWTxZYEcXLgAXFuUuaS3uF9gEi
