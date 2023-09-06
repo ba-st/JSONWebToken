@@ -4,11 +4,11 @@ An empty algorithm for not signing
 Class {
 	#name : #JWANone,
 	#superclass : #JsonWebAlgorithm,
-	#category : 'JSONWebToken-Core-Algorithms'
+	#category : #'JSONWebToken-Core-Algorithms'
 }
 
 { #category : #sign }
-JWANone class >> checkSignatureOfParts: parts withKey: key [
+JWANone class >> checkSignature: signature withKey: key isValidFor: headerAndPayload [
 	
 ]
 

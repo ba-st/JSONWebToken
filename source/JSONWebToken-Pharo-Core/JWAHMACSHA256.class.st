@@ -4,19 +4,15 @@ HMAC SHA256
 Class {
 	#name : #JWAHMACSHA256,
 	#superclass : #JsonWebAlgorithm,
-	#category : 'JSONWebToken-Pharo-Core'
+	#category : #'JSONWebToken-Pharo-Core'
 }
 
 { #category : #sign }
-JWAHMACSHA256 class >> checkSignatureOfParts: parts withKey: key [
-	(self
-		signMessage:
-			($.
-				join:
-					{parts first.
-					parts second}) withKey: key)
-		= (Base64UrlEncoder new decode: parts third base64Padded)
-		ifFalse: [ Error signal: 'signature does not match' ]
+JWAHMACSHA256 class >> checkSignature: signature withKey: key isValidFor: headerAndPayload [
+
+	( self signMessage: headerAndPayload withKey: key )
+	= ( Base64UrlEncoder new decode: signature base64Padded ) ifFalse: [
+		Error signal: 'signature does not match' ]
 ]
 
 { #category : #accessing }

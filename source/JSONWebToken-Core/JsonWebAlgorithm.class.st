@@ -4,22 +4,28 @@ Abstract superclass for algorithms used for web encryption
 Class {
 	#name : #JsonWebAlgorithm,
 	#superclass : #Object,
-	#category : 'JSONWebToken-Core-Algorithms'
+	#category : #'JSONWebToken-Core-Algorithms'
 }
 
 { #category : #sign }
 JsonWebAlgorithm class >> checkSignature: token withKey: key [
 	"keep this method backward compatible also accepting already splitted parts"
-	self 
-		checkSignatureOfParts: (token isString 
-			ifTrue: [ $. split: token ]
-			ifFalse: [ token ])
-		withKey: key
+
+	| tokenParts |
+
+	tokenParts := token isString
+		              ifTrue: [ $. split: token ]
+		              ifFalse: [ token ].
+
+	self checkSignature: tokenParts third withKey: key isValidFor: ( $. join: {
+				  tokenParts first.
+				  tokenParts second } )
 ]
 
 { #category : #sign }
-JsonWebAlgorithm class >> checkSignatureOfParts: parts withKey: key [
-	self subclassResponsibility 
+JsonWebAlgorithm class >> checkSignature: signature withKey: key isValidFor: headerAndPayload [
+
+	self subclassResponsibility
 ]
 
 { #category : #testing }
@@ -37,4 +43,10 @@ JsonWebAlgorithm class >> named: aString [
 { #category : #accessing }
 JsonWebAlgorithm class >> parameterValue [
 	self shouldBeImplemented 
+]
+
+{ #category : #sign }
+JsonWebAlgorithm class >> signMessage: aString withKey: anObject [
+
+	self subclassResponsibility
 ]

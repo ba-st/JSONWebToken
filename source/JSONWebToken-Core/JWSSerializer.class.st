@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : 'JSONWebToken-Core-Serialization'
+	#category : #'JSONWebToken-Core-Serialization'
 }
 
 { #category : #conversion }
@@ -25,10 +25,10 @@ JWSSerializer class >> base64UrlEncoded: aByteArray [
 	"According to https://tools.ietf.org/html/rfc7519#page-4 the encoding needs to be base64Url.
 	The padding is stripped as it is not used for transport in JWT"
 
-	^ ( Base64UrlEncoder new encode: aByteArray ) copyWithoutAll: '='
+	^ ( Base64UrlEncoder new encode: aByteArray ) copyWithout: $=
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #conversion }
 JWSSerializer class >> toJson: anObject [
 	^ NeoJSONWriter toString: anObject
 ]
