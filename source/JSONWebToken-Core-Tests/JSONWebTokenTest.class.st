@@ -57,6 +57,23 @@ JSONWebTokenTest >> testEncoding [
 ]
 
 { #category : #tests }
+JSONWebTokenTest >> testFailingSignatureChecking [
+
+	| jws tokenString |
+
+	jws := JsonWebSignature new
+		       algorithmName: 'HS256';
+		       payload: ( JWTClaimsSet new at: 'bar' put: 'foo' ).
+	jws symmetricKey: 'foobar'.
+
+	tokenString := jws compactSerialized.
+
+	self
+		should: [ JsonWebSignature materializeCompact: tokenString , 'X' key: 'foobar' ]
+		raise: CryptoError
+]
+
+{ #category : #tests }
 JSONWebTokenTest >> testPadding [
 
 	self 

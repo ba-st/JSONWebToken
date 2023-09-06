@@ -51,6 +51,25 @@ MwIDAQAB
 ]
 
 { #category : #tests }
+JSONWebTokenOpenSSLTest >> testFailingSignatureChecking [
+
+	| jws tokenString |
+
+	jws := JsonWebSignature new
+		       algorithmName: 'RS256';
+		       payload: ( JWTClaimsSet new at: 'bar' put: 'foo' ).
+	jws
+		privateKey: self privateKey;
+		publicKey: self publicKey.
+
+	tokenString := jws compactSerialized.
+
+	self
+		should: [ JsonWebSignature materializeCompact: tokenString , 'X' key: self publicKey ]
+		raise: CryptoError
+]
+
+{ #category : #tests }
 JSONWebTokenOpenSSLTest >> testRSAEncoding [
 	"This test verifies the token serialization against https://jwt.io/"
 

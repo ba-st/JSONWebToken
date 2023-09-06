@@ -10,9 +10,8 @@ Class {
 { #category : #sign }
 GsJWAHMACSHA256 class >> checkSignature: signature withKey: key isValidFor: headerAndPayload [
 
-	( self signMessage: headerAndPayload withKey: key )
-	= ( Base64UrlEncoder new decode: signature base64Padded ) ifFalse: [
-		Error signal: 'signature does not match' ]
+	( self signMessage: headerAndPayload withKey: key ) = ( JWSSerializer base64UrlDecoded: signature )
+		ifFalse: [ CryptoError signal: 'signature does not match' ]
 ]
 
 { #category : #accessing }

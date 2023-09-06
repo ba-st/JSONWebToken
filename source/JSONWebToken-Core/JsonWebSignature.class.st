@@ -49,7 +49,7 @@ JsonWebSignature >> algorithmName: aString [
 { #category : #private }
 JsonWebSignature >> base64UrlDecoded: aBase64String [
 
-	^ Base64UrlEncoder new decode: aBase64String base64Padded
+	^ JWSSerializer base64UrlDecoded: aBase64String
 ]
 
 { #category : #signature }

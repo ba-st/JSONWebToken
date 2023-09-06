@@ -15,12 +15,13 @@ Class {
 	#classVars : [
 		'URLSafeAlphabet'
 	],
-	#category : 'JSONWebToken-Core-Serialization'
+	#category : #'JSONWebToken-Core-Serialization'
 }
 
 { #category : #'class initialization' }
 Base64UrlEncoder class >> initialize [
 
+	<ignoreForCoverage>
 	URLSafeAlphabet := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
 ]
 
