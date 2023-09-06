@@ -25,6 +25,6 @@ GsJWARSASHA256 class >> parameterValue [
 GsJWARSASHA256 class >> signMessage: aString withKey: privateKey [
 
 	^ aString
-		  signWithSha256AndRsaPssPrivateKey: ( GsTlsPrivateKey newFromPemString: privateKey )
+		  signWithSha256AndRsaPrivateKey: ( GsTlsPrivateKey newFromPemString: privateKey )
 		  into: nil
 ]
