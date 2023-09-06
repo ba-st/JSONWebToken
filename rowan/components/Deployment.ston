@@ -6,14 +6,16 @@ RwSimpleProjectLoadComponentV2 {
   #componentNames : [	],
   #packageNames : [
     'JSONWebToken-Core',
-    'JSONWebToken-GS64-Base-Extensions'
+    'JSONWebToken-GS64-Base-Extensions',
+    'JSONWebToken-GS64-Core'
   ],
   #conditionalPackageMapSpecs : {
     'gemstone' : {
       'allusers' : {
         #packageNameToPlatformPropertiesMap : {
           'JSONWebToken-Core' : { 'symbolDictName' : 'JSONWebToken' },
-          'JSONWebToken-GS64-Base-Extensions' : { 'symbolDictName' : 'Globals' }
+          'JSONWebToken-GS64-Base-Extensions' : { 'symbolDictName' : 'Globals' },
+          'JSONWebToken-GS64-Core' : { 'symbolDictName' : 'JSONWebToken' }
         }
       }
     }
