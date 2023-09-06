@@ -9,7 +9,7 @@ Class {
 		'key',
 		'protectedHeader'
 	],
-	#category : 'JSONWebToken-Core-Base'
+	#category : #'JSONWebToken-Core-Base'
 }
 
 { #category : #materializing }
@@ -57,7 +57,7 @@ JsonWebSignature >> checkSignature: aString [
 	token := (aString isString not) 
 		ifTrue: [ 
 			"this seems to be the old usage handing out the parts collection so resemble"
-			$. join: aString  ]
+			'.' join: aString  ]
 		ifFalse: [ aString ].
 	
 	self protectedHeader algorithm checkSignature: token withKey: key

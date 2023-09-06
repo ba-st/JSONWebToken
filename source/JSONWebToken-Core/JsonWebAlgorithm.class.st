@@ -17,7 +17,7 @@ JsonWebAlgorithm class >> checkSignature: token withKey: key [
 		              ifTrue: [ $. split: token ]
 		              ifFalse: [ token ].
 
-	self checkSignature: tokenParts third withKey: key isValidFor: ( $. join: {
+	self checkSignature: tokenParts third withKey: key isValidFor: ( '.' join: {
 				  tokenParts first.
 				  tokenParts second } )
 ]

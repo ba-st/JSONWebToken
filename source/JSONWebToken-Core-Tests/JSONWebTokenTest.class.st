@@ -4,7 +4,7 @@ Unit tests for JSON web tokens
 Class {
 	#name : #JSONWebTokenTest,
 	#superclass : #TestCase,
-	#category : 'JSONWebToken-Core-Tests'
+	#category : #'JSONWebToken-Core-Tests'
 }
 
 { #category : #'as yet unclassified' }
@@ -25,7 +25,7 @@ JSONWebTokenTest >> simpleTokenString [
 JSONWebTokenTest >> testDecodingThreeParts [ 
 	| tokenString invalid |
 	tokenString := self simpleTokenString.
-	invalid := $. join: ($. split: tokenString) allButLast.
+	invalid := '.' join: ($. split: tokenString) allButLast.
 	self 
 		should: [ JsonWebSignature materializeCompact: invalid key: 'foobar' ]
 		raise: JWSInvalidTokenFormat.

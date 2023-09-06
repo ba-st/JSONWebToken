@@ -23,5 +23,5 @@ GsJWAHMACSHA256 class >> parameterValue [
 { #category : #sign }
 GsJWAHMACSHA256 class >> signMessage: aString withKey: key [
 
-	^ aString asSha256HmacWithKey: key
+	^ ByteArray fromHexString: ( aString asSha256HmacStringWithKey: key )
 ]
