@@ -8,14 +8,12 @@ Class {
 }
 
 { #category : #sign }
-JWARSASHA256 class >> checkSignature: signature withKey: key isValidFor: headerAndPayload [
+JWARSASHA256 class >> checkSignature: signature withKey: publicKeyOrString isValidFor: headerAndPayload [
 
 	| signatureAsBytes publicKey |
 
 	signatureAsBytes := JWSSerializer base64UrlDecoded: signature.
-	publicKey := ( key includesSubstring: 'BEGIN RSA PUBLIC KEY' )
-		             ifTrue: [ LcEvpPublicKey setRSA: ( LcRSA fromRsaPublicKeyPemString: key ) ]
-		             ifFalse: [ LcEvpPublicKey fromPublicKeyPemString: key ].
+	publicKey := publicKeyOrString asPublicKey.
 	headerAndPayload pinInMemory.
 	signatureAsBytes pinInMemory.
 	[
@@ -33,11 +31,11 @@ JWARSASHA256 class >> parameterValue [
 ]
 
 { #category : #sign }
-JWARSASHA256 class >> signMessage: message withKey: privateKey [
-	| pkey sig |
-	pkey := LcEvpPublicKey setRSA: (LcRSA fromPemString: privateKey).
+JWARSASHA256 class >> signMessage: message withKey: privateKeyOrString [
+
+	| privateKey |
+
+	privateKey := privateKeyOrString asPrivateKey.
 	message pinInMemory.
-	sig := [ pkey digestSignMessage: message ]
-		ensure: [ message unpinInMemory ].
-	^ sig
+	^ [ privateKey digestSignMessage: message ] ensure: [ message unpinInMemory ]
 ]

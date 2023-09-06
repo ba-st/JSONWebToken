@@ -8,10 +8,10 @@ Class {
 }
 
 { #category : #sign }
-GsJWARSASHA256 class >> checkSignature: signature withKey: publicKey isValidFor: headerAndPayload [
+GsJWARSASHA256 class >> checkSignature: signature withKey: publicKeyOrString isValidFor: headerAndPayload [
 
 	^ headerAndPayload
-		  verifyWithSha256AndRsaPublicKey: ( GsTlsPublicKey newFromPemString: publicKey )
+		  verifyWithSha256AndRsaPublicKey: publicKeyOrString asPublicKey
 		  signature: ( JWSSerializer base64UrlDecoded: signature )
 ]
 
@@ -22,9 +22,7 @@ GsJWARSASHA256 class >> parameterValue [
 ]
 
 { #category : #sign }
-GsJWARSASHA256 class >> signMessage: aString withKey: privateKey [
+GsJWARSASHA256 class >> signMessage: aString withKey: privateKeyOrString [
 
-	^ aString
-		  signWithSha256AndRsaPrivateKey: ( GsTlsPrivateKey newFromPemString: privateKey )
-		  into: nil
+	^ aString signWithSha256AndRsaPrivateKey: privateKeyOrString asPrivateKey into: nil
 ]

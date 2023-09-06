@@ -1,6 +1,18 @@
 Extension { #name : #CharacterCollection }
 
 { #category : #'*JSONWebToken-GS64-Base-Extensions' }
+CharacterCollection >> asPrivateKey [
+
+	^ GsTlsPrivateKey newFromPemString: self
+]
+
+{ #category : #'*JSONWebToken-GS64-Base-Extensions' }
+CharacterCollection >> asPublicKey [
+
+	^ GsTlsPublicKey newFromPemString: self
+]
+
+{ #category : #'*JSONWebToken-GS64-Base-Extensions' }
 CharacterCollection >> base64Padded [
 	| paddedString |
 	paddedString := ((self size \\ 4) = 0) 
