@@ -4,22 +4,10 @@ Class {
 	#category : #'JSONWebToken-OpenSSL-Tests'
 }
 
-{ #category : #tests }
-JSONWebTokenOpenSSLTest >> testRSAEncoding [
+{ #category : #private }
+JSONWebTokenOpenSSLTest >> privateKey [
 
-	"This test verifies the token serialization against https://jwt.io/"
-
-	| jws tokenString |
-
-	jws := JsonWebSignature new
-		algorithmName: 'RS256';
-		payload:
-			( JWTClaimsSet new
-				at: 'scope'
-					put:
-					'read:operations read:metrics execute:health-check read:application-info execute:application-control read:application-configuration';
-				yourself ).
-	jws privateKey: '-----BEGIN RSA PRIVATE KEY-----
+	^ '-----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAnzyis1ZjfNB0bBgKFMSvvkTtwlvBsaJq7S5wA+kzeVOVpVWw
 kWdVha4s38XM/pa/yr47av7+z3VTmvDRyAHcaT92whREFpLv9cj5lTeJSibyr/Mr
 m/YtjCZVWgaOYIhwrXwKLqPr/11inWsAkfIytvHWTxZYEcXLgAXFuUuaS3uF9gEi
@@ -45,12 +33,61 @@ NvVi5vcba9oGdElJX3e9mxqUKMrw7msJJv1MX8LWyMQC5L6YNYHDfbPF1q5L4i8j
 3YfRAoGAUxL/Eu5yvMK8SAt/dJK6FedngcM3JEFNplmtLYVLWhkIlNRGDwkg3I5K
 y18Ae9n7dHVueyslrb6weq7dTkYDi3iOYRW8HRkIQh06wEdbxt0shTzAJvvCQfrB
 jg/3747WSsf/zBTcHihTRBdAv6OmdhV4/dD5YBfLAkLrd+mX7iE=
------END RSA PRIVATE KEY-----'.
+-----END RSA PRIVATE KEY-----'
+]
+
+{ #category : #private }
+JSONWebTokenOpenSSLTest >> publicKey [
+
+	^ '-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnzyis1ZjfNB0bBgKFMSv
+vkTtwlvBsaJq7S5wA+kzeVOVpVWwkWdVha4s38XM/pa/yr47av7+z3VTmvDRyAHc
+aT92whREFpLv9cj5lTeJSibyr/Mrm/YtjCZVWgaOYIhwrXwKLqPr/11inWsAkfIy
+tvHWTxZYEcXLgAXFuUuaS3uF9gEiNQwzGTU1v0FqkqTBr4B8nW3HCN47XUu0t8Y0
+e+lf4s4OxQawWD79J9/5d3Ry0vbV3Am1FtGJiJvOwRsIfVChDpYStTcHTCMqtvWb
+V6L11BWkpzGXSW4Hv43qa+GSYOD2QU68Mb59oSk2OB+BtOLpJofmbGEGgvmwyCI9
+MwIDAQAB
+-----END PUBLIC KEY-----'
+]
+
+{ #category : #tests }
+JSONWebTokenOpenSSLTest >> testRSAEncoding [
+	"This test verifies the token serialization against https://jwt.io/"
+
+	| jws tokenString |
+
+	jws := JsonWebSignature new
+		       algorithmName: 'RS256';
+		       payload: ( JWTClaimsSet new
+				         at: 'scope'
+				         put:
+					         'read:operations read:metrics execute:health-check read:application-info execute:application-control read:application-configuration';
+				         yourself ).
+	jws privateKey: self privateKey.
 
 	tokenString := jws compactSerialized.
 
 	self
 		assert: tokenString
 		equals:
-			'eyJhbGciOiJSUzI1NiJ9.eyJzY29wZSI6InJlYWQ6b3BlcmF0aW9ucyByZWFkOm1ldHJpY3MgZXhlY3V0ZTpoZWFsdGgtY2hlY2sgcmVhZDphcHBsaWNhdGlvbi1pbmZvIGV4ZWN1dGU6YXBwbGljYXRpb24tY29udHJvbCByZWFkOmFwcGxpY2F0aW9uLWNvbmZpZ3VyYXRpb24ifQ.GAOd8yN4b1R85hF4BrI7SUtdrQClMrymg7BaZoSIPezc9j-qBvIzJNcZT0a_hE44v8XUhHQJaaMzCgEoIWvN_i31RhL-NT_d85m2jm1HAd1hdePveS5shgYGVa0YUloRqLUsaTK03spCe3AayHBxG0-IJdw5ZZ85grce1JFc-T3uxGE_meuSBSYoW8QWEQ7hyBkHrJX0Twu1W0VMRGQw1UDnur2xxVZnz66iAYEQVZUQmsbMqgwOPETNvlvfmTQJq4V_hbc9bNmzJwo8TeoH5_lUYkPp5wWtT3H7dZpNEROP8QGgHiO9Y8ByKOBSrlNOID0pBvNlRbOAz_2Vmiir-g'
+		'eyJhbGciOiJSUzI1NiJ9.eyJzY29wZSI6InJlYWQ6b3BlcmF0aW9ucyByZWFkOm1ldHJpY3MgZXhlY3V0ZTpoZWFsdGgtY2hlY2sgcmVhZDphcHBsaWNhdGlvbi1pbmZvIGV4ZWN1dGU6YXBwbGljYXRpb24tY29udHJvbCByZWFkOmFwcGxpY2F0aW9uLWNvbmZpZ3VyYXRpb24ifQ.GAOd8yN4b1R85hF4BrI7SUtdrQClMrymg7BaZoSIPezc9j-qBvIzJNcZT0a_hE44v8XUhHQJaaMzCgEoIWvN_i31RhL-NT_d85m2jm1HAd1hdePveS5shgYGVa0YUloRqLUsaTK03spCe3AayHBxG0-IJdw5ZZ85grce1JFc-T3uxGE_meuSBSYoW8QWEQ7hyBkHrJX0Twu1W0VMRGQw1UDnur2xxVZnz66iAYEQVZUQmsbMqgwOPETNvlvfmTQJq4V_hbc9bNmzJwo8TeoH5_lUYkPp5wWtT3H7dZpNEROP8QGgHiO9Y8ByKOBSrlNOID0pBvNlRbOAz_2Vmiir-g'
+]
+
+{ #category : #tests }
+JSONWebTokenOpenSSLTest >> testRoundtrip [
+
+	| jws tokenString materialized |
+
+	jws := JsonWebSignature new
+		       algorithmName: 'RS256';
+		       payload: ( JWTClaimsSet new at: 'bar' put: 'foo' ).
+	jws
+		privateKey: self privateKey;
+		publicKey: self publicKey.
+
+	tokenString := jws compactSerialized.
+
+	materialized := JsonWebSignature materializeCompact: tokenString key: self publicKey.
+
+	self assert: jws equals: materialized
 ]
