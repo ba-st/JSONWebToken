@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfJSONWebToken,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfJSONWebToken'
+	#category : #BaselineOfJSONWebToken
 }
 
 { #category : #baselines }
@@ -18,7 +18,7 @@ BaselineOfJSONWebToken >> baseline: spec [
 			package: 'JSONWebToken-Pharo-Core' with: [ spec requires: #( 'JSONWebToken-Core' ) ];
 			package: 'JSONWebToken-Core-Tests'
 			with: [ spec requires: #( 'JSONWebToken-Core' 'JSONWebToken-Pharo-Core' ) ];
-			package: 'JSONWebToken-OpenSSL' with: [ spec requires: #( 'JSONWebToken-Core' 'OpenSSL' ) ];
+			package: 'JSONWebToken-OpenSSL' with: [ spec requires: #( 'Core' 'OpenSSL' ) ];
 			package: 'JSONWebToken-OpenSSL-Tests' with: [ spec requires: #( 'JSONWebToken-OpenSSL' ) ].
 		spec
 			group: 'Core' with: #( 'JSONWebToken-Core' 'JSONWebToken-Pharo-Core' );
