@@ -8,7 +8,8 @@ Class {
 BaselineOfJSONWebToken >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [
+	spec for: #pharo do: [
+		spec postLoadDoIt: #configureMessageDigestAlgorithms.
 		spec baseline: 'NeoJSON' with: [ spec repository: 'github://svenvc/NeoJSON:master/repository' ].
 		spec
 			baseline: 'OpenSSL'
@@ -26,4 +27,13 @@ BaselineOfJSONWebToken >> baseline: spec [
 			group: 'Tests' with: #( 'JSONWebToken-Core-Tests' 'JSONWebToken-OpenSSL-Tests' );
 			group: 'default' with: #( 'Core' 'SSL' 'Tests' )
 		]
+]
+
+{ #category : #baselines }
+BaselineOfJSONWebToken >> configureMessageDigestAlgorithms [
+
+	Smalltalk globals
+		at: #MessageDigestAlgorithm
+		ifPresent: [ :class |
+		class use: [ SHA1 new ] for: class sha1ShortName ]
 ]
