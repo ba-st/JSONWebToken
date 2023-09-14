@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'Algorithms'
 	],
-	#category : #'JSONWebToken-Core'
+	#category : #'JSONWebToken-Core-Algorithms'
 }
 
 { #category : #'class initialization' }
