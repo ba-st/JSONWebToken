@@ -39,13 +39,13 @@ GsSHA1 >> digestAsHexString: bytes [
 { #category : #digesting }
 GsSHA1 >> digestString: string [
 
-	^ string sha1SumBytes
+	^ string utf8Encoded sha1SumBytes
 ]
 
 { #category : #digesting }
 GsSHA1 >> digestStringAsHexString: string [
 
-	^ string asSha1String
+	^ string utf8Encoded asSha1String
 ]
 
 { #category : #accessing }
