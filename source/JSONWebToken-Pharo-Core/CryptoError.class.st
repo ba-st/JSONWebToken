@@ -1,5 +1,6 @@
 Class {
-	#name : #CryptoError,
-	#superclass : #Error,
-	#category : #'JSONWebToken-Pharo-Core'
+	#name : 'CryptoError',
+	#superclass : 'Error',
+	#category : 'JSONWebToken-Pharo-Core',
+	#package : 'JSONWebToken-Pharo-Core'
 }

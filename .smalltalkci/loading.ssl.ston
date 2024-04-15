@@ -4,7 +4,8 @@ SmalltalkCISpec {
       #baseline : 'JSONWebToken',
       #directory : '../source',
       #load : [ 'SSL' ],
-      #platforms : [  #pharo ]
+      #platforms : [  #pharo ],
+      #failOn : [ #Warning ]
     }
   ],
   #testing : {
